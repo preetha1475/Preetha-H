@@ -77,6 +77,12 @@
       margin: auto;
       text-align: center;
     }
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
 
     .title {
       font-size: 2.8rem;
@@ -156,6 +162,7 @@
 </head>
 
 <body>
+<canvas id="bg"></canvas>
 
 <!-- MENU ICON -->
 <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -196,12 +203,12 @@
     <div class="contact-card">
       <h3>Resume</h3>
       <p>Download my resume</p>
-      <a href="assests/Preetha_Resume.pdf" download>Download PDF</a>
+      <a href="assets/Preetha_Resume.pdf" download>Download PDF</a>
     </div>
 
   </div>
 
-  <a href="assests/Preetha_Resume.pdf" class="resume-btn" download>
+  <a href="assets/Preetha_Resume.pdf" class="resume-btn" download>
     Download Resume
   </a>
 </section>
@@ -214,11 +221,57 @@
   function closeMenu() {
     document.getElementById("sideMenu").classList.remove("active");
   }
+
+  /* ===== PARTICLE BACKGROUND ===== */
+  const canvas = document.getElementById('bg');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 2 + 0.5;
+      this.speedX = (Math.random() - 0.5) * 0.7;
+      this.speedY = (Math.random() - 0.5) * 0.7;
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    }
+    draw() {
+      ctx.fillStyle = '#00f6ff';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function initParticles() {
+    particles = [];
+    for (let i = 0; i < 120; i++) particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animate);
+  }
+
+  addEventListener('resize', () => {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+    initParticles();
+  });
+
+  initParticles();
+  animate();
 </script>
 
 </body>
 </html>
-
-
-
-
