@@ -16,11 +16,14 @@
     }
 
     canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-    }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none; /* ✅ ADD THIS */
+}
 
     /* ===== MENU ICON ===== */
     .menu-toggle {
@@ -79,10 +82,13 @@
 
     /* ===== CONTENT ===== */
     .about {
-      padding: 120px 6vw 60px;
-      max-width: 1200px;
-      margin: auto;
-    }
+  padding: 120px 6vw 60px;
+  max-width: 1200px;
+  margin: auto;
+  position: relative; /* ✅ ADD */
+  z-index: 1;         /* ✅ ADD */
+}
+
 
     .section-title {
       font-size: clamp(2rem, 5vw, 2.8rem);
