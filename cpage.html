@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Certificates | Preetha</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
@@ -20,24 +21,62 @@
       z-index: -1;
     }
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 60px;
-      background: rgba(5, 8, 22, 0.6);
-      backdrop-filter: blur(10px);
+    /* ===== MENU ICON ===== */
+    .menu-toggle {
       position: fixed;
-      width: 100%;
-      z-index: 10;
+      top: 20px;
+      right: 25px;
+      font-size: 2rem;
+      color: #00f6ff;
+      cursor: pointer;
+      z-index: 20;
     }
 
-    nav h1 { color: #00f6ff; }
+    /* ===== RIGHT SLIDE MENU ===== */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -260px;
+      width: 260px;
+      height: 100vh;
+      background: rgba(5, 8, 22, 0.9);
+      backdrop-filter: blur(12px);
+      padding: 30px 20px;
+      z-index: 15;
+      transition: right 0.4s ease;
+    }
 
-    nav ul { list-style: none; display: flex; gap: 30px; }
-    nav ul li a { color: #fff; text-decoration: none; transition: 0.3s; }
-    nav ul li a:hover { color: #00f6ff; }
+    .sidebar.active {
+      right: 0;
+    }
 
+    .sidebar h1 {
+      color: #00f6ff;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .sidebar ul li a {
+      color: #fff;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .sidebar ul li a:hover {
+      color: #00f6ff;
+      transform: translateX(-5px);
+    }
+
+    /* ===== CERTIFICATES SECTION (UNCHANGED) ===== */
     .certificates {
       padding: 140px 80px 80px;
       max-width: 1300px;
@@ -122,29 +161,32 @@
     }
 
     @media(max-width: 768px) {
-      nav { padding: 20px; }
       .certificates { padding: 120px 30px; }
       .title { font-size: 2.2rem; }
+      .sidebar h1 { display: none; }
     }
   </style>
 </head>
+
 <body>
 
 <canvas id="bg"></canvas>
 
-<nav>
-    <h1>Preetha</h1>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="aboutpage.html">About</a></li>
-      <li><a href="cpage.html">Certificates</a></li>
-      <li><a href="pro.html">Projects</a></li>
-      <li><a href="tools.html">Tools</a></li>
+<!-- MENU ICON -->
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-      <li><a href="contacs.html">Contact</a></li>
-    </ul>
-  </nav>
-
+<!-- SLIDE MENU -->
+<nav class="sidebar" id="sideMenu">
+  <h1>Preetha</h1>
+  <ul>
+    <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+    <li><a href="aboutpage.html" onclick="closeMenu()">About</a></li>
+    <li><a href="cpage.html" onclick="closeMenu()">Certificates</a></li>
+    <li><a href="pro.html" onclick="closeMenu()">Projects</a></li>
+    <li><a href="tools.html" onclick="closeMenu()">Tools</a></li>
+    <li><a href="contacs.html" onclick="closeMenu()">Contact</a></li>
+  </ul>
+</nav>
 
 <section class="certificates">
   <h2 class="title">Certificates</h2>
@@ -152,7 +194,7 @@
   <div class="grid">
 
     <div class="cert-box">
-      <div class="cert-name">Power BI Job Simulation – pwc</div>
+      <div class="cert-name">Power BI Job Simulation – PWC</div>
       <div class="cert-img" style="background-image:url('assests/certificates/pbi.png')"></div>
       <div class="overlay"></div>
     </div>
@@ -162,12 +204,12 @@
       <div class="cert-img" style="background-image:url('assests/certificates/tabs.png')"></div>
       <div class="overlay"></div>
     </div>
-<div class="cert-box">
-      <div class="cert-name">Power BI for Beginners  – Simplilearn</div>
+
+    <div class="cert-box">
+      <div class="cert-name">Power BI for Beginners – Simplilearn</div>
       <div class="cert-img" style="background-image:url('assests/certificates/pbis.png')"></div>
       <div class="overlay"></div>
     </div>
-
 
     <div class="cert-box">
       <div class="cert-name">Introduction to SQL – Infosys Springboard</div>
@@ -198,34 +240,43 @@
       <div class="cert-img" style="background-image:url('assests/certificates/aw2.png')"></div>
       <div class="overlay"></div>
     </div>
-<div class="cert-box">
-      <div class="cert-name">Introduction to GenAI  – AWS</div>
+
+    <div class="cert-box">
+      <div class="cert-name">Introduction to GenAI – AWS</div>
       <div class="cert-img" style="background-image:url('assests/certificates/aws1.png')"></div>
       <div class="overlay"></div>
     </div>
-<div class="cert-box">
-      <div class="cert-name">Strategy Consulting Job Simulation – accenture</div>
+
+    <div class="cert-box">
+      <div class="cert-name">Strategy Consulting Job Simulation – Accenture</div>
       <div class="cert-img" style="background-image:url('assests/certificates/acc.png')"></div>
       <div class="overlay"></div>
     </div>
-<div class="cert-box">
+
+    <div class="cert-box">
       <div class="cert-name">Introduction to MongoDB – MongoDB</div>
       <div class="cert-img" style="background-image:url('assests/certificates/mon.png')"></div>
       <div class="overlay"></div>
     </div>
-<div class="cert-box">
+
+    <div class="cert-box">
       <div class="cert-name">Data Analytics Job Simulation – Deloitte</div>
       <div class="cert-img" style="background-image:url('assests/certificates/dell.png')"></div>
       <div class="overlay"></div>
     </div>
 
-
-
-
   </div>
 </section>
 
 <script>
+  function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("active");
+  }
+
+  function closeMenu() {
+    document.getElementById("sideMenu").classList.remove("active");
+  }
+
   const canvas = document.getElementById('bg');
   const ctx = canvas.getContext('2d');
   canvas.width = innerWidth;
@@ -277,5 +328,3 @@
 
 </body>
 </html>
-
-
