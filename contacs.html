@@ -15,27 +15,62 @@
       overflow-x: hidden;
     }
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 60px;
-      background: rgba(5, 8, 22, 0.6);
-      backdrop-filter: blur(10px);
+    /* ===== MENU ICON ===== */
+    .menu-toggle {
       position: fixed;
-      width: 100%;
-      z-index: 10;
+      top: 20px;
+      right: 25px;
+      font-size: 2rem;
+      color: #00f6ff;
+      cursor: pointer;
+      z-index: 20;
     }
 
-    nav h1 { color: #00f6ff; }
-    nav ul { list-style: none; display: flex; gap: 30px; }
-    nav ul li a {
+    /* ===== RIGHT SLIDE MENU ===== */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -260px;
+      width: 260px;
+      height: 100vh;
+      background: rgba(5, 8, 22, 0.9);
+      backdrop-filter: blur(12px);
+      padding: 30px 20px;
+      z-index: 15;
+      transition: right 0.4s ease;
+    }
+
+    .sidebar.active {
+      right: 0;
+    }
+
+    .sidebar h1 {
+      color: #00f6ff;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .sidebar ul li a {
       color: #fff;
+      font-size: 1.1rem;
       text-decoration: none;
       transition: 0.3s;
     }
-    nav ul li a:hover { color: #00f6ff; }
 
+    .sidebar ul li a:hover {
+      color: #00f6ff;
+      transform: translateX(-5px);
+    }
+
+    /* ===== CONTACT SECTION (UNCHANGED) ===== */
     .contact {
       padding: 150px 80px 80px;
       max-width: 900px;
@@ -113,28 +148,30 @@
     }
 
     @media(max-width: 768px) {
-      nav { padding: 20px; }
       .contact { padding: 130px 30px; }
       .title { font-size: 2.2rem; }
+      .sidebar h1 { display: none; }
     }
   </style>
 </head>
 
 <body>
 
-<nav>
-    <h1>Preetha</h1>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="aboutpage.html">About</a></li>
-      <li><a href="cpage.html">Certificates</a></li>
-      <li><a href="pro.html">Projects</a></li>
-      <li><a href="tools.html">Tools</a></li>
+<!-- MENU ICON -->
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-      <li><a href="contacs.html">Contact</a></li>
-    </ul>
-  </nav>
-
+<!-- SLIDE MENU -->
+<nav class="sidebar" id="sideMenu">
+  <h1>Preetha</h1>
+  <ul>
+    <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+    <li><a href="aboutpage.html" onclick="closeMenu()">About</a></li>
+    <li><a href="cpage.html" onclick="closeMenu()">Certificates</a></li>
+    <li><a href="pro.html" onclick="closeMenu()">Projects</a></li>
+    <li><a href="tools.html" onclick="closeMenu()">Tools</a></li>
+    <li><a href="contacs.html" onclick="closeMenu()">Contact</a></li>
+  </ul>
+</nav>
 
 <section class="contact">
   <h2 class="title">Get in Touch</h2>
@@ -144,33 +181,40 @@
 
   <div class="contact-grid">
 
-    <!-- Email -->
     <div class="contact-card">
       <h3>Email</h3>
       <p>pretha1475@gmail.com</p>
       <a href="mailto:pretha1475@gmail.com">Send Mail</a>
     </div>
 
-    <!-- LinkedIn -->
     <div class="contact-card">
       <h3>LinkedIn</h3>
       <p>www.linkedin.com/in/preethahari</p>
       <a href="https://www.linkedin.com/in/preethahari/" target="_blank">View Profile</a>
     </div>
 
-    <!-- Resume -->
     <div class="contact-card">
       <h3>Resume</h3>
       <p>Download my resume</p>
-      <a href="assests/Preetha_Resume.pdf" download>Download PDF</a>
+      <a href="assets/Preetha_Resume.pdf" download>Download PDF</a>
     </div>
 
   </div>
 
-  <a href="assests/Preetha_Resume.pdf" class="resume-btn" download>
+  <a href="assets/Preetha_Resume.pdf" class="resume-btn" download>
     Download Resume
   </a>
 </section>
+
+<script>
+  function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("active");
+  }
+
+  function closeMenu() {
+    document.getElementById("sideMenu").classList.remove("active");
+  }
+</script>
 
 </body>
 </html>
